@@ -1,6 +1,8 @@
 package com.example.leetcode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,14 +16,34 @@ import java.util.Map;
  */
 public class TwoSum {
     public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> hashtable = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int i = 0; i < nums.length; ++i) {
             int c = target - nums[i];
-            if (hashtable.containsKey(c)) {
-                return new int[]{hashtable.get(c), i};
+            if (map.containsKey(c)) {
+                return new int[]{map.get(c), i};
             }
-            hashtable.put(nums[i], i);
+            map.put(nums[i], i);
         }
         return new int[0];
+    }
+//所有的结果
+    public static List<Map<Integer,Integer>> allTwoSum(int[] nums, int target){
+        Map<Integer,Integer> tempMap=new HashMap<>();
+        List<Map<Integer,Integer>> results=new ArrayList<>();
+        for (int i=0;i<nums.length;i++){
+            int c = target - nums[i];
+            if (tempMap.containsKey(c)){
+                Map<Integer,Integer> resultMap=new HashMap<>();
+                resultMap.put(tempMap.get(c),i);
+                results.add(resultMap);
+            }
+            tempMap.put(nums[i],i);
+        }
+        return results;
+    }
+
+    public static void main(String[] args) {
+       int[] nums ={0,2, 7, 3,6,11,15,9};
+        System.out.println(allTwoSum(nums,9));
     }
 }

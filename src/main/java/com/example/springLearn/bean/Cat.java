@@ -11,6 +11,7 @@ public class Cat {
     private String name;
     private int age;
 
+
     public void die() {
         System.out.println("我死了。。。。。。。");
     }

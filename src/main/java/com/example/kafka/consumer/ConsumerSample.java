@@ -77,7 +77,9 @@ public class ConsumerSample {
                         record.partition(), record.offset(), record.key(), record.value());
                 // 如果失败，则回滚， 不要提交offset
             }
-
+            if (records.isEmpty()){
+                System.out.println("消费失败");
+            }
             // 如果成功，手动通知offset提交
             consumer.commitAsync();
         }

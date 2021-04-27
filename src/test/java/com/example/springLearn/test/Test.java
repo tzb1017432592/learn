@@ -8,6 +8,7 @@ import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 
+import javax.print.attribute.standard.PrinterURI;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
@@ -281,6 +282,19 @@ public class Test {
         maopao(arr);
         int erfeng = erfeng(arr, 0, arr.length - 1, 62);
         System.out.println(erfeng);
+    }
+
+    @org.junit.Test
+    public  void  test023233(){
+        Callable<String> result=new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                Thread.sleep(10000);
+                return "success";
+            }
+        };
+        System.out.println(result);
+
     }
 
 }

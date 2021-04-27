@@ -1,6 +1,7 @@
 package com.example.kafka.producer;
 
 import org.apache.kafka.clients.producer.*;
+import org.apache.kafka.common.errors.RetriableException;
 
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
@@ -8,7 +9,7 @@ import java.util.concurrent.Future;
 
 public class ProducerSample {
 
-    private final static String TOPIC_NAME="jiangzh-topic";
+    private final static String TOPIC_NAME="test-topic";
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         // Producer异步发送演示
 //        producerSend();
@@ -58,6 +59,8 @@ public class ProducerSample {
         producer.close();
     }
 
+
+
     /*
         Producer异步发送带回调函数
      */
@@ -83,8 +86,19 @@ public class ProducerSample {
             producer.send(record, new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-                    System.out.println(
-                            "partition : "+recordMetadata.partition()+" , offset : "+recordMetadata.offset());
+                    if (e==null){
+                        System.out.println("消息发送成功");
+                        System.out.println(
+                                "partition : "+recordMetadata.partition()+" , offset : "+recordMetadata.offset());
+
+                    }else {
+                        if (e instanceof RetriableException){
+                            System.out.println("可重试错误");
+                        }else {
+                            System.out.println("不可重试错误");
+                        }
+                        System.out.println("消息发送失败，执行失败处理，一般存库或者重发");
+                    }
                 }
             });
         }
@@ -137,6 +151,7 @@ public class ProducerSample {
 
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringSerializer");
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringSerializer");
+
 
         // Producer的主对象
         Producer<String,String> producer = new KafkaProducer<>(properties);
