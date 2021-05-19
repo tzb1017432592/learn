@@ -1,9 +1,11 @@
 package com.example.springLearn.test;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.springLearn.newlearn.bean.Html;
 import com.example.sunfa.maopao.MaoPao;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -23,12 +25,31 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Test {
     @org.junit.Test
+    public void test03(){
+        String join = StringUtils.join("dd:ff:gg:hh:jj", ":");
+        System.out.println(System.currentTimeMillis());
+    }
+    @org.junit.Test
     public void test01() {
-        ReentrantLock
-                AbstractQueuedSynchronizer;
-        int tail = 7;
-        tail = 1 / 8;
-        System.out.println(tail);
+    String str="{\n" +
+            "  \"app_usernum\": {\n" +
+            "    \"@redis_mark\": \"app_user_num_second\",\n" +
+            "    \"@value_type\": \"list\",\n" +
+            "    \"@value_len\": \"1\",\n" +
+            "    \"@alias\": \"app_usernum\",\n" +
+            "    \"@aggoperator\": \"value\",\n" +
+            "    \"@then\": {\n" +
+            "      \"@value_type\": \"hash\",\n" +
+            "      \"@aggoperator\": \"total\"\n" +
+            "    }\n" +
+            "  }\n" +
+            "}";
+        JSONObject filejson = JSONObject.parseObject(str);
+        for (Map.Entry<String, Object> entry : filejson.entrySet()) {
+            System.out.println(entry.getKey());
+            System.out.println("=============");
+            System.out.println(entry.getValue());
+        }
     }
 
     public static void main(String[] args) {

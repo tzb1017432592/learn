@@ -24,7 +24,6 @@ public class SelectSort {
                 array[tempIndex] = array[i];
                 array[i] = temp;
             }
-            System.out.println("   第" + (i + 1) + "趟后:" + Arrays.toString(array));
         }
     }
 }

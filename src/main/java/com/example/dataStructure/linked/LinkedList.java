@@ -91,6 +91,9 @@ public class LinkedList<E> {
             throw new IllegalArgumentException("Get failed. Illegal index.");
 
         Node cur = dummyHead.next;
+        if (cur==null){
+            return null;
+        }
         for (int i = 0; i < index; i++)
             cur = cur.next;
         return cur.e;
@@ -103,7 +106,7 @@ public class LinkedList<E> {
 
     // 获得链表的最后一个元素
     public E getLast() {
-        return get(size - 1);
+        return get(size-1);
     }
 
     // 修改链表的第index(0-based)个位置的元素为e
