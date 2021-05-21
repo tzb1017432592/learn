@@ -15,6 +15,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.util.*;
+import java.util.Queue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CyclicBarrier;
@@ -316,6 +317,15 @@ public class Test {
         };
         System.out.println(result);
 
+    }
+
+    @org.junit.Test
+    public void test01311() {
+        Queue<String> queue=new LinkedList<>();
+        queue.offer("jjj");
+        queue.offer("ddd");
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
     }
 
 }
