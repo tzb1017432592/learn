@@ -140,17 +140,17 @@ public class BST<E extends Comparable<E>> {
 
     // 二分搜索树的层序遍历
     public void levelOrder(){
-
-        Queue<Node> q = new LinkedList<>();
-        q.add(root);
-        while(!q.isEmpty()){
-            Node cur = q.remove();
-            System.out.println(cur.e);
-
-            if(cur.left != null)
-                q.add(cur.left);
-            if(cur.right != null)
-                q.add(cur.right);
+        Queue<Node> queue=new LinkedList<>();
+        queue.add(root);
+        if (!queue.isEmpty()){
+            Node outNode = queue.remove();
+            System.out.println(outNode.e);
+            if (outNode.left != null){
+                queue.add(outNode.left);
+            }
+            if (outNode.right != null){
+                queue.add(outNode.right);
+            }
         }
     }
 

@@ -35,17 +35,19 @@ public class LinkedList<E> {
     }
 
     public void reverList(){
-        Node head = dummyHead.next;
-        Node preNode=null;
-        while (head!=null){
-            Node next = head.next;
-            if (next==null){
-                dummyHead.next=head;
-            }
-            head.next=preNode;
-            preNode=head;
-            head=next;
+        Node current = dummyHead.next;
+        Node next = null;
+        Node prev = null;
+        if (current != null && current.next != null) {
+            return;
         }
+        while (current != null) {
+            next = current.next; //获取当前节点的下一个节点
+            current.next = prev; //将当前节点的next指向前节点
+            prev = current; //下一轮循环中，当前节点就是下一轮循环的前节点
+            current = next; //前节点的下一个节点是下一轮的当前节点
+        }
+        dummyHead.next = next;
     }
 
     // 获取链表中的元素个数
