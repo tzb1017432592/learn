@@ -21,8 +21,8 @@ public class HuiWenZiChuan {
             return "";
         }
         int strLen = s.length();
-        int left = 0;
-        int right = 0;
+        int left ;
+        int right ;
         int len = 1;
         int maxStart = 0;
         int maxLen = 0;
@@ -51,5 +51,9 @@ public class HuiWenZiChuan {
         }
         return s.substring(maxStart + 1, maxStart + maxLen + 1);
 
+    }
+
+    public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis());
     }
 }

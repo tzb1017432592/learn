@@ -16,6 +16,10 @@ public class Test {
         Apple proxyInstance = (Apple) ProxyFatory.getProxyInstance(new IPhone());
         String iPhone11 = proxyInstance.getIdAndName(1, "IPhone1");
         System.out.println(iPhone11);
+
+        System.out.println("==========");
+
+        proxyInstance.printName("IPhone12");
     }
 
     @org.junit.Test
