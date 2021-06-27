@@ -13,6 +13,10 @@ public class MyProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         proxy = obj;
-        return method.invoke(proxy, args);
+        System.out.println("增强方法是:"+method);
+        System.out.println("前置增强");
+        Object invoke = method.invoke(proxy, args);
+        System.out.println("后置增强");
+        return invoke;
     }
 }
