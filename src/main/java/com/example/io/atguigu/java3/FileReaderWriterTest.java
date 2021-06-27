@@ -42,12 +42,15 @@ public class FileReaderWriterTest {
      */
     @Test
     public void testFileReader() {
-        FileReader fr = null;
-        try {
+        /*FileReader fr = null;*/
+        File file = new File("hello.txt");
+        try(FileReader fr = new FileReader(file)) {
             //1.实例化File类的对象，指明要操作的文件
+/*
             File file = new File("hello.txt");//相较于当前Module
+*/
             //2.提供具体的流
-            fr = new FileReader(file);
+
 
             //3.数据的读入
             //read():返回读入的一个字符。如果达到文件末尾，返回-1
@@ -65,22 +68,6 @@ public class FileReaderWriterTest {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            //4.流的关闭操作
-//            try {
-//                if(fr != null)
-//                    fr.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-            //或
-            if (fr != null) {
-                try {
-                    fr.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
     }
@@ -178,12 +165,13 @@ public class FileReaderWriterTest {
 
     @Test
     public void testFileReaderFileWriter() {
-        FileReader fr = null;
-        FileWriter fw = null;
-        try {
+        File srcFile = new File("hello.txt");
+        File destFile = new File("hello2.txt");
+        try(FileReader fr= new FileReader(srcFile);
+            FileWriter fw =new FileWriter(destFile);
+            ) {
             //1.创建File类的对象，指明读入和写出的文件
-            File srcFile = new File("hello.txt");
-            File destFile = new File("hello2.txt");
+
 
             //不能使用字符流来处理图片等字节数据
 //            File srcFile = new File("爱情与友情.jpg");
@@ -191,8 +179,7 @@ public class FileReaderWriterTest {
 
 
             //2.创建输入流和输出流的对象
-            fr = new FileReader(srcFile);
-            fw = new FileWriter(destFile);
+
 
 
             //3.数据的读入和写出操作
@@ -205,7 +192,7 @@ public class FileReaderWriterTest {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
             //4.关闭流资源
             //方式一：
 //            try {
@@ -222,21 +209,6 @@ public class FileReaderWriterTest {
 //                }
 //            }
             //方式二：
-            try {
-                if (fw != null)
-                    fw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                if (fr != null)
-                    fr.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
 
     }
 
