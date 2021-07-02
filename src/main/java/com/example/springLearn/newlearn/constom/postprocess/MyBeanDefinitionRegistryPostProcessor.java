@@ -15,12 +15,12 @@ public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegi
         RootBeanDefinition rootBeanDefinition = new RootBeanDefinition();
         rootBeanDefinition.setBeanClass(Hadoop.class);
         registry.registerBeanDefinition("hadoop32", rootBeanDefinition);
-        System.out.println("MyBeanDefinitionRegistryPostProcessor:postProcessBeanDefinitionRegistry===============");
+        System.out.println("BeanDefinitionRegistryPostProcessor:postProcessBeanDefinitionRegistry===============");
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        System.out.println("MyBeanDefinitionRegistryPostProcessor:postProcessBeanFactory===============");
+        System.out.println("BeanDefinitionRegistryPostProcessor:postProcessBeanFactory===============");
 
     }
 }

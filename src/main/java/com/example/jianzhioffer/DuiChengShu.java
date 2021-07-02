@@ -31,7 +31,7 @@ public class DuiChengShu {
       TreeNode(int x) { val = x; }
   }
     public boolean isSymmetric(TreeNode root) {
-        return root==null?true:recur(root.left, root.right);
+        return root == null || recur(root.left, root.right);
     }
 
     private boolean recur(TreeNode left, TreeNode right) {

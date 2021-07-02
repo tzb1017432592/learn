@@ -1,7 +1,11 @@
 package com.example.jianzhioffer;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 回溯
@@ -38,5 +42,17 @@ public class ZiFuChuangPaiLie {
             //递归往回走的时候要撤销选择
             visited[i] = false;
         }
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list = new LinkedList<>();
+
+        list.add(3);
+        list.add(2);
+        list.add(5);
+
+        list = list.stream().sorted().collect(Collectors.toList());
+
+        System.out.println(list);
     }
 }

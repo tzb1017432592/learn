@@ -30,7 +30,6 @@ public class ZuiChangZiZhuang {
                len++;
                max=Math.max(max,len);
             }
-
         }
         return max;
     }

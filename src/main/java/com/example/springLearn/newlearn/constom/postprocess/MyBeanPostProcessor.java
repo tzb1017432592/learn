@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 public class MyBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        /*  System.out.println(beanName+"开始初始化了.......");*/
+        System.out.println(beanName+"开始初始化了.......");
         System.out.println("9999"+bean);
         return bean;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        /* System.out.println(beanName+"初始化完成了.......");*/
+         System.out.println(beanName+"初始化完成了.......");
         System.out.println("9999"+bean);
         return bean;
     }

@@ -69,6 +69,51 @@ public class Test {
         ac.close();
     }
 
+    public static void intspp(int i) {
+        i++;
+    }
+
+    public static void intspp(String i) {
+        i = i + "ddddd";
+    }
+
+    @org.junit.Test
+    public void test54() {
+        int i = 10;
+        intspp(i);
+        System.out.println(i);
+    }
+
+    class Cat {
+        public Cat(String name) {
+            this.name = name;
+        }
+
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
+    @org.junit.Test
+    public void test524() {
+        Cat c1 = new Cat("王磊");
+        Cat c2 = new Cat("王磊");
+        System.out.println(c1==c2);
+    }
+
+    @org.junit.Test
+    public void test514() {
+        String i = "aaa";
+        intspp(i);
+        System.out.println(i);
+    }
+
     @org.junit.Test
     public void test5() {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SpringConfig.class);

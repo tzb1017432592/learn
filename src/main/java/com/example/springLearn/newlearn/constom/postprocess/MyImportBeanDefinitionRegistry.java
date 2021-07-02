@@ -15,6 +15,6 @@ public class MyImportBeanDefinitionRegistry implements ImportBeanDefinitionRegis
         RootBeanDefinition rootBeanDefinition = new RootBeanDefinition();
         rootBeanDefinition.setBeanClass(Hadoop.class);
         registry.registerBeanDefinition("hadoop2", rootBeanDefinition);
-        System.out.println("MyBeanDefinitionRegistryPostProcessor:postProcessBeanDefinitionRegistry===============");
+        System.out.println("ImportBeanDefinitionRegistrar:postProcessBeanDefinitionRegistry===============");
     }
 }
