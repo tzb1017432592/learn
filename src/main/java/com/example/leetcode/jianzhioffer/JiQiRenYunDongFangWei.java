@@ -1,4 +1,4 @@
-package com.example.jianzhioffer;
+package com.example.leetcode.jianzhioffer;
 
 /**
  * 地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，

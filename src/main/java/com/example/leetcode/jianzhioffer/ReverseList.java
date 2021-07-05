@@ -1,4 +1,4 @@
-package com.example.jianzhioffer;
+package com.example.leetcode.jianzhioffer;
 
 /**
  * @author tianzhoubing

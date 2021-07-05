@@ -1,4 +1,4 @@
-package com.example.jianzhioffer;
+package com.example.leetcode.jianzhioffer;
 
 import java.util.ArrayList;
 import java.util.Deque;

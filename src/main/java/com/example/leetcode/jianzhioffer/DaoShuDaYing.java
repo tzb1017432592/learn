@@ -1,9 +1,5 @@
-package com.example.jianzhioffer;
+package com.example.leetcode.jianzhioffer;
 
-import com.google.common.primitives.Ints;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 /**
