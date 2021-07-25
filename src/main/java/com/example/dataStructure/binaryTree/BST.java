@@ -196,7 +196,8 @@ public class BST<E extends Comparable<E>> {
 
     // 删除掉以node为根的二分搜索树中的最小节点
     // 返回删除节点后新的二分搜索树的根
-    private Node removeMin(Node node) {
+    private Node
+    removeMin(Node node) {
 
         if (node.left == null) {
             Node rightNode = node.right;

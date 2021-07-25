@@ -27,7 +27,7 @@ public class JiQiRenYunDongFangWei {
         visited[x][y] = true;
         int right=x+1;
         int down=y+1;
-        return 1 + dfs(right, y, move(right), sy) + dfs(x, down, sx, move(down));
+        return 1 + dfs(right, y, move(right), move(y)) + dfs(x, down, move(x), move(down));
     }
 
     public int move(int x){

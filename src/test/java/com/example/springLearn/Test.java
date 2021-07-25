@@ -1,6 +1,8 @@
 package com.example.springLearn;
 
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author tianzhoubing
@@ -60,5 +62,37 @@ public class Test {
             }
         }
         return list;
+    }
+
+    public static void main(String[] args) {
+        ExecutorService service= Executors.newFixedThreadPool(10);
+
+
+
+        Thread t1=new Thread(()->{
+            System.out.println("a");
+        });
+        Thread t2=new Thread(()->{
+            try {
+                t1.join();
+                System.out.println("b");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        Thread t3=new Thread(()->{
+            try {
+                t2.join();
+                System.out.println("c");
+                System.out.println("               ");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        while (true) {
+            service.submit(t1);
+            service.submit(t2);
+            service.submit(t3);
+        }
     }
 }
