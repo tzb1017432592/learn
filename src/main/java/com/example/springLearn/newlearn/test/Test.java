@@ -68,7 +68,6 @@ public class Test {
         System.out.println(bean.toString());
         ac.close();
     }
-
     public static void intspp(int i) {
         i++;
     }
