@@ -2,6 +2,7 @@ package com.example.springLearn.test;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.springLearn.newlearn.bean.Html;
+import com.example.springLearn.newlearn.bean.User;
 import com.example.sunfa.maopao.MaoPao;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -190,11 +191,19 @@ public class Test {
         System.out.println(ints[0] + "" + ints[1]);
     }
 
+
     @org.junit.Test
-    public void test322() throws UnknownHostException {
-        HashMap hashMap = new HashMap<Integer, Integer>();
-        hashMap.put(1, 1);
-        System.out.println(hashMap.get(2));
+    public void test322() throws CloneNotSupportedException {
+        User user = new User();
+        user.setName("sds");
+        user.setId(1);
+
+        int i=(int) 3.5;
+
+        User clone = (User)user.clone();
+
+        System.out.println(clone==user);
+
 
     }
 
@@ -321,11 +330,19 @@ public class Test {
 
     @org.junit.Test
     public void test01311() {
-        Queue<String> queue=new LinkedList<>();
-        queue.offer("jjj");
-        queue.offer("ddd");
-        System.out.println(queue.poll());
-        System.out.println(queue.poll());
+        System.out.println(81%10);
+        System.out.println(81/10);
+    }
+    private Integer g=4;
+    private void change(Integer i){
+        i=5;
+        g=8;
+    }
+
+    @org.junit.Test
+    public void test01321() {
+        change(g);
+        System.out.println(g);
     }
 
 }
