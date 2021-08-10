@@ -29,8 +29,7 @@ public class LRUCache {
             }
         } else {
             if (cache.size() > 0) {
-                Integer k=key;
-                cache.remove(k);
+                cache.remove(key);
             }
         }
         map.put(key, value);

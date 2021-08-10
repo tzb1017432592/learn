@@ -29,7 +29,7 @@ public class ArrayStack<T> implements AbstractStack<T> {
     }
 
     private void expandCapacity() {
-        Arrays.copyOf(stack,stack.length*2);
+        Arrays.copyOf(stack, stack.length * 2);
     }
 
     @Override

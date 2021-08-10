@@ -27,25 +27,26 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Test {
     @org.junit.Test
-    public void test03(){
+    public void test03() {
         String join = StringUtils.join("dd:ff:gg:hh:jj", ":");
         System.out.println(System.currentTimeMillis());
     }
+
     @org.junit.Test
     public void test01() {
-    String str="{\n" +
-            "  \"app_usernum\": {\n" +
-            "    \"@redis_mark\": \"app_user_num_second\",\n" +
-            "    \"@value_type\": \"list\",\n" +
-            "    \"@value_len\": \"1\",\n" +
-            "    \"@alias\": \"app_usernum\",\n" +
-            "    \"@aggoperator\": \"value\",\n" +
-            "    \"@then\": {\n" +
-            "      \"@value_type\": \"hash\",\n" +
-            "      \"@aggoperator\": \"total\"\n" +
-            "    }\n" +
-            "  }\n" +
-            "}";
+        String str = "{\n" +
+                "  \"app_usernum\": {\n" +
+                "    \"@redis_mark\": \"app_user_num_second\",\n" +
+                "    \"@value_type\": \"list\",\n" +
+                "    \"@value_len\": \"1\",\n" +
+                "    \"@alias\": \"app_usernum\",\n" +
+                "    \"@aggoperator\": \"value\",\n" +
+                "    \"@then\": {\n" +
+                "      \"@value_type\": \"hash\",\n" +
+                "      \"@aggoperator\": \"total\"\n" +
+                "    }\n" +
+                "  }\n" +
+                "}";
         JSONObject filejson = JSONObject.parseObject(str);
         for (Map.Entry<String, Object> entry : filejson.entrySet()) {
             System.out.println(entry.getKey());
@@ -54,23 +55,6 @@ public class Test {
         }
     }
 
-    public static void main(String[] args) {
-
-
-      /*  String str = "helloabcdworld";
-        // 开始位置的下标
-        int start = 5;
-        // 结束位置的下标
-        int end = 8;
-        System.out.println("原先的字符串: "+str);
-        String strNew=strReverse(str, start, end);
-        System.out.println("指定部分进行反转后的字符串: "+strNew);*/
-
-        int[] array = {10, 2, 4, 8, 9, 5, 7, 3, 1, 6};
-        System.out.println("排序之前的数组: " + Arrays.toString(array));
-        Quick_Sort(array, 0, array.length - 1);
-        System.out.println("排序之后的数组: " + Arrays.toString(array));
-    }
 
     /**
      * @param str   原先的字符串
@@ -198,11 +182,11 @@ public class Test {
         user.setName("sds");
         user.setId(1);
 
-        int i=(int) 3.5;
+        int i = (int) 3.5;
 
-        User clone = (User)user.clone();
+        User clone = (User) user.clone();
 
-        System.out.println(clone==user);
+        System.out.println(clone == user);
 
 
     }
@@ -215,8 +199,8 @@ public class Test {
         System.out.println("ip:" + inetSocketAddress.getAddress().getHostAddress());
     }
 
-    public void quickly(int[] arr,int begin,int end) {
-        if (begin>end){
+    public void quickly(int[] arr, int begin, int end) {
+        if (begin > end) {
             return;
         }
         int temp = arr[begin];
@@ -234,50 +218,52 @@ public class Test {
                 arr[i] = t;
             }
         }
-        int head=arr[i];
-        arr[i]=temp;
-        arr[begin]=head;
-        quickly(arr,begin,i-1);
-        quickly(arr,i+1,end);
+        int head = arr[i];
+        arr[i] = temp;
+        arr[begin] = head;
+        quickly(arr, begin, i - 1);
+        quickly(arr, i + 1, end);
     }
 
-    public void maopao(int[] arr){
-        for (int i=0;i<arr.length-1;i++){
-            boolean isend=true;
-            for (int j=0;j<arr.length-i-1;j++){
-                if (arr[j]>arr[j+1]){
-                    int temp=arr[j];
-                    arr[j]=arr[j+1];
-                    arr[j+1]=temp;
-                    isend=false;
+    public void maopao(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            boolean isend = true;
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    isend = false;
                 }
             }
-            while (isend){
+            while (isend) {
                 break;
             }
         }
     }
-    public int erfeng(int[] arr,int begin,int end,int target){
-        if (begin>end){
+
+    public int erfeng(int[] arr, int begin, int end, int target) {
+        if (begin > end) {
             return -1;
         }
-        int min=(begin+end)/2;
-        if (arr[min]==target){
+        int min = (begin + end) / 2;
+        if (arr[min] == target) {
             return min;
-        }if (arr[min]>target){
-            return erfeng(arr,begin,min-1,target);
-        } else{
-            return erfeng(arr,min+1,end,target);
+        }
+        if (arr[min] > target) {
+            return erfeng(arr, begin, min - 1, target);
+        } else {
+            return erfeng(arr, min + 1, end, target);
         }
     }
 
-    public void select(int[] arr){
-        for (int i=0;i<arr.length;i++){
-            for (int j=i+1;j<arr.length;j++){
-                if (arr[i]>arr[j]){
-                    int temp=arr[i];
-                    arr[i]=arr[j];
-                    arr[j]=temp;
+    public void select(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] > arr[j]) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
                 }
             }
         }
@@ -285,39 +271,42 @@ public class Test {
 
     @org.junit.Test
     public void test0111() {
-        int[] arr={55,66,78,154,1,32,45,78,41,62,31,6,9,7,18,98,784,611,35,48,19,76,13};
-        quickly(arr,0,arr.length-1);
+        int[] arr = {55, 66, 78, 154, 1, 32, 45, 78, 41, 62, 31, 6, 9, 7, 18, 98, 784, 611, 35, 48, 19, 76, 13};
+        quickly(arr, 0, arr.length - 1);
         for (int i : arr) {
             System.out.println(i);
         }
     }
+
     @org.junit.Test
     public void test01111() {
-        int[] arr={55,66,78,154,1,32,45,78,41,62,31,6,9,7,18,98,784,611,35,48,19,76,13};
+        int[] arr = {55, 66, 78, 154, 1, 32, 45, 78, 41, 62, 31, 6, 9, 7, 18, 98, 784, 611, 35, 48, 19, 76, 13};
         maopao(arr);
         for (int i : arr) {
             System.out.println(i);
         }
     }
+
     @org.junit.Test
     public void test0111111() {
-        int[] arr={55,66,78,154,1,32,45,78,41,62,31,6,9,7,18,98,784,611,35,48,19,76,13};
+        int[] arr = {55, 66, 78, 154, 1, 32, 45, 78, 41, 62, 31, 6, 9, 7, 18, 98, 784, 611, 35, 48, 19, 76, 13};
         select(arr);
         for (int i : arr) {
             System.out.println(i);
         }
     }
+
     @org.junit.Test
     public void test011111() {
-        int[] arr={55,66,78,154,1,32,45,78,41,62,31,6,9,7,18,98,784,611,35,48,19,76,13};
+        int[] arr = {55, 66, 78, 154, 1, 32, 45, 78, 41, 62, 31, 6, 9, 7, 18, 98, 784, 611, 35, 48, 19, 76, 13};
         maopao(arr);
         int erfeng = erfeng(arr, 0, arr.length - 1, 62);
         System.out.println(erfeng);
     }
 
     @org.junit.Test
-    public  void  test023233(){
-        Callable<String> result=new Callable<String>() {
+    public void test023233() {
+        Callable<String> result = new Callable<String>() {
             @Override
             public String call() throws Exception {
                 Thread.sleep(10000);
@@ -330,13 +319,15 @@ public class Test {
 
     @org.junit.Test
     public void test01311() {
-        System.out.println(81%10);
-        System.out.println(81/10);
+        System.out.println(81 % 10);
+        System.out.println(81 / 10);
     }
-    private Integer g=4;
-    private void change(Integer i){
-        i=5;
-        g=8;
+
+    private Integer g = 4;
+
+    private void change(Integer i) {
+        i = 5;
+        g = 8;
     }
 
     @org.junit.Test
@@ -345,4 +336,24 @@ public class Test {
         System.out.println(g);
     }
 
+    @org.junit.Test
+    public void test321() {
+        int[] arr = {4,1,2,1,2};
+        int single = 0;
+        for (int num : arr) {
+            single ^= num;
+        }
+        System.out.println(single);
+    }
+
+    public static int multi(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        return n * multi(n - 1); //递归调用multi（）方法
+    }
+
+    public static void main(String[] args) {
+        System.out.println(multi(2));
+    }
 }

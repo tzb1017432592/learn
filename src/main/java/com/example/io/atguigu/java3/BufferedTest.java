@@ -155,8 +155,8 @@ public class BufferedTest {
         BufferedWriter bw = null;
         try {
             //创建文件和相应的流
-            br = new BufferedReader(new FileReader(new File("dbcp.txt")));
-            bw = new BufferedWriter(new FileWriter(new File("dbcp1.txt")));
+            br = new BufferedReader(new FileReader("dbcp.txt"));
+            bw = new BufferedWriter(new FileWriter("dbcp1.txt"));
 
             //读写操作
             //方式一：使用char[]数组
