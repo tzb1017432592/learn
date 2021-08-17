@@ -1,5 +1,9 @@
 package com.example.springLearn;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+
 /**
  * @author tianzhoubing
  * @date 2021/5/24 19:05
@@ -45,6 +49,31 @@ public class Test {
                 }
             }
         }
+    }
+
+    static long s=0;
+    static Semaphore semaphore = new Semaphore(100000);
+    static Runnable runnable = ()->{
+        try {
+            semaphore.acquire();
+            s++;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            semaphore.release();
+        }
+
+    };
+
+    public static void main(String[] args) {
+        ExecutorService service = Executors.newFixedThreadPool(10);
+        for (int i = 0; i <100000 ; i++) {
+            service.submit(runnable);
+        }
+        service.shutdown();
+        while (!service.isTerminated()){
+        }
+        System.out.println(s);
     }
 
 }
