@@ -11,7 +11,7 @@ package com.example.leetcode.hot;
  * 垂直线 i的两个端点分别为(i,ai) 和 (i, 0) 。找出其中的两条线，使得它们与x轴共同构成的容器可以容纳最多的水。
  *
  * 说明：你不能倾斜容器。
-  双指针
+ * 双指针
  **/
 public class ChengZuiDuoShuiDeRongQi {
     public int maxArea(int[] height) {
