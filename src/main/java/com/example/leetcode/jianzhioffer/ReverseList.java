@@ -19,13 +19,12 @@ public class ReverseList {
 
     public ListNode reverseList(ListNode head) {
         ListNode current = head;
-        ListNode next;
         ListNode prev = null;
         if (head == null || head.next == null) {
             return head;
         }
         while (current != null) {
-            next = current.next;
+            ListNode next = current.next;
             current.next = prev;
             prev = current;
             head = current;
