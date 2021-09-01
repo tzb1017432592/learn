@@ -48,6 +48,8 @@ public class LuoXunJuZhen {
             right--;
             top++;
             bottom--;
+
+
         }
         return order;
     }
