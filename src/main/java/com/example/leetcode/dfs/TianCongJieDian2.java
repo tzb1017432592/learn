@@ -1,16 +1,8 @@
 package com.example.leetcode.dfs;
 
 /**
- * 填充每个节点的下一个右侧节点指针
+ * 填充每个节点的下一个右侧节点指针2
  *
- * 给定一个 完美二叉树 ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：
- *
- * struct Node {
- *   int val;
- *   Node *left;
- *   Node *right;
- *   Node *next;
- * }
  * 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。
  *
  * 初始状态下，所有 next 指针都被设置为 NULL。
@@ -24,11 +16,11 @@ package com.example.leetcode.dfs;
  *  
  *
  * 示例：
- * 输入：root = [1,2,3,4,5,6,7]
- * 输出：[1,#,2,3,#,4,5,6,7,#]
- * 解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。序列化的输出按层序遍历排列，同一层节点由 next 指针连接，'#' 标志着每一层的结束。
+ * 输入：root = [1,2,3,4,5,null,7]
+ * 输出：[1,#,2,3,#,4,5,7,#]
+ * 解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。序列化输出按层序遍历顺序（由 next 指针连接），'#' 表示每层的末尾。
  */
-public class TianCongJieDian {
+public class TianCongJieDian2 {
     class Node {
         public int val;
         public Node left;
@@ -58,17 +50,9 @@ public class TianCongJieDian {
     }
 
     private void dfs(Node root) {
-       if (root == null){
+       if (root==null){
            return;
        }
-        Node left = root.left;
-        Node right = root.right;
-        while (left != null) {
-            left.next=right;
-            left=left.right;
-            right=right.left;
-        }
-        dfs(root.left);
-        dfs(root.right);
+
     }
 }
