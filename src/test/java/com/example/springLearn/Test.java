@@ -1,8 +1,10 @@
 package com.example.springLearn;
 
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * @author tianzhoubing
@@ -64,16 +66,25 @@ public class Test {
         }
 
     };
+   static LongAdder longAdder = new LongAdder();
+   static Long l = 0l;
+    static Runnable runnable2 = ()->{
+            longAdder.increment();
+            l++;
+    };
 
     public static void main(String[] args) {
-        ExecutorService service = Executors.newFixedThreadPool(10);
+        ExecutorService service = Executors.newFixedThreadPool(50);
         for (int i = 0; i <100000 ; i++) {
-            service.submit(runnable);
+            service.submit(runnable2);
         }
+
+        System.out.println(longAdder.longValue());
         service.shutdown();
         while (!service.isTerminated()){
         }
-        System.out.println(s);
+        System.out.println(longAdder.longValue());
+        System.out.println(l);
     }
 
 }

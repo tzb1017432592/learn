@@ -1,6 +1,7 @@
 package com.example.springLearn.test;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.springLearn.LinkedList;
 import com.example.springLearn.newlearn.bean.Html;
 import com.example.springLearn.newlearn.bean.User;
 import com.example.sunfa.maopao.MaoPao;
@@ -337,13 +338,25 @@ public class Test {
     }
 
     @org.junit.Test
+    public void test32() {
+        List<String> list = new ArrayList();
+        list.add("dd");
+        list.add("dd2");
+        list.add("dd3");
+        list.add("dd4");
+        LinkedList linkedList = new LinkedList();
+
+    }
+
+    @org.junit.Test
     public void test321() {
-        int[] arr = {4,1,2,1,2};
-        int single = 0;
-        for (int num : arr) {
-            single ^= num;
-        }
-        System.out.println(single);
+        String[] cs = "abccdefcdh".split("c");
+        System.out.println(cs.length);
+        double d=5.3e12;
+    }
+
+    private class dd{
+
     }
 
     public static int multi(int n) {
