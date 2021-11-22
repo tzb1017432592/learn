@@ -11,7 +11,6 @@ public class ServiceTest {
 */
   /*  @Autowired
     private  com.mystarter.tzbclientstarter.MyClientService*/
-  @Transactional
   public void test1(){
 
   }

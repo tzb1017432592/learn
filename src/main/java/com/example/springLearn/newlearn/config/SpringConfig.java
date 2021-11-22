@@ -1,7 +1,5 @@
 package com.example.springLearn.newlearn.config;
 
-import com.example.springLearn.aop.AspectLogs;
-import com.example.springLearn.newlearn.constom.MyFilter;
 import com.example.springLearn.newlearn.bean.*;
 import com.example.springLearn.newlearn.constom.ConditionConstom;
 import com.example.springLearn.newlearn.constom.FaBean;

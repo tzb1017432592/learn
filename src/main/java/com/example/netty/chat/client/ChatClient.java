@@ -44,7 +44,7 @@ public class ChatClient {
             System.out.println("客户端已经关闭");
 
         } catch (Exception e) {
-
+            System.out.println(e);
         } finally {
             works.shutdownGracefully();
         }
