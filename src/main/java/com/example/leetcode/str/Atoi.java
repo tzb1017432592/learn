@@ -55,6 +55,6 @@ public class Atoi {
     }
 
     public static void main(String[] args) {
-        myAtoi("");
+        System.out.println(myAtoi(""));
     }
 }

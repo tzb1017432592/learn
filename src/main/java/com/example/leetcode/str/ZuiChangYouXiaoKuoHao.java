@@ -25,24 +25,26 @@ import java.util.LinkedList;
  * 示例 3：
  *
  * 输入：s = ""
+ * 0
  **/
 public class ZuiChangYouXiaoKuoHao {
     public int longestValidParentheses(String s) {
         Deque<Integer> deque = new LinkedList<>();
         int length = s.length();
         int maxLen = 0;
+        deque.push(-1);
         for (int i = 0; i < length; i++) {
-            int n = -1;
-            if (s.charAt(i)=='('){
-                n = 1;
-            }
-            if (deque.size()>0 && deque.peek()+n==0) {
-                while (deque.peek()+n==0){
-                    deque.pop();
-                }
-            }else {
-                deque.push(n);
-            }
+           if (s.charAt(i)=='('){
+               deque.push(i);
+           }else {
+               deque.pop();
+               if (deque.isEmpty()){
+                    deque.push(i);
+               }else {
+                   maxLen = Math.max(maxLen,i-deque.peek());
+               }
+           }
         }
+        return maxLen;
     }
 }
