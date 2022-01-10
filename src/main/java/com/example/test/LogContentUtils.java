@@ -2,6 +2,7 @@ package com.example.test;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
@@ -10,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 
+import javax.ws.rs.PUT;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -75,28 +77,22 @@ public class LogContentUtils {
                 JSONObject jsonObject = null;
                 try {
                     if (StringUtils.contains(content, "{")) {
-                        jsonObject = JSONObject.parseObject(content);
+                        jsonObject = JSONObject.parseObject(content, Feature.DisableSpecialKeyDetect);
                     } else {
                         byte[] jsonDecode = Base64.getDecoder().decode(content);
                         String jsonContent = new String(jsonDecode);
-                        jsonObject = JSONObject.parseObject(jsonContent);
+                        jsonObject = JSONObject.parseObject(jsonContent,Feature.DisableSpecialKeyDetect);
                     }
                 } catch (Exception e) {
                     log.error("es json解析错误【" + e + "】");
                 }
                 resultMap.put(contentType, jsonObject);
-                //loop(jsonObject, resultList);
-
             } else if (isTextPlain || isUrlencoded) {
                 resultMap.put(contentType, content);
             }
         }
         return resultMap;
     }
-
-    static Integer err = 0;
-    static Integer suc = 0;
-
     private static String processGzip(byte[] decode) {
         String resultStr = StringUtils.EMPTY;
         byte[] splitBytes = "\r\n\r\n".getBytes(StandardCharsets.ISO_8859_1);
@@ -153,11 +149,7 @@ public class LogContentUtils {
                     fout.write(buffer, 0, n);
                 }
                 resultStr = fout.toString();
-                if (StringUtils.isNotBlank(resultStr)) {
-                    suc++;
-                }
             } catch (Exception e) {
-                err++;
                 log.error("");
             }
         } catch (Exception e) {
@@ -203,98 +195,4 @@ public class LogContentUtils {
         });
     }
 
-    public static void main(String[] args) throws IOException {
-        List<String> stringList = FileUtils.readLines(new File("C:\\Users\\10174\\Desktop\\logjson\\gzip.text"), StandardCharsets.UTF_8);
-        List<Map<String, Object>> lines = new ArrayList<>();
-        for (String s : stringList) {
-            lines.add(parseContent(s));
-        }
-        System.out.println("err:" + err);
-        System.out.println("suc:" + suc);
-    }
-
-    @Test
-    public void test345() throws Exception {
-
-        URL url = new URL("https://foundation.youdao.com/offline/allpatch?patchkey=NMT");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("Accept-Encoding", "gzip,deflate");
-        conn.connect();
-        InputStream inconn = conn.getInputStream();
-        ByteArrayOutputStream orOutArray = new ByteArrayOutputStream();
-        byte[] buf = new byte[1024];
-        int len;
-        while ((len = inconn.read(buf)) != -1) {
-            orOutArray.write(buf, 0, len);
-        }
-        String entity = "SFRUUC8xLjEgMjAwIA0KU2VydmVyOiBuZ2lueA0KRGF0ZTogVHVlLCAwMiBOb3YgMjAyMSAwNTo0MToxMCBHTVQNCkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbjtjaGFyc2V0PXV0Zi04DQpUcmFuc2Zlci1FbmNvZGluZzogY2h1bmtlZA0KQ29ubmVjdGlvbjoga2VlcC1hbGl2ZQ0KVmFyeTogQWNjZXB0LUVuY29kaW5nDQpDb250ZW50LUVuY29kaW5nOiBnemlwDQoNCmMyDQofiwgAAAAAAAQDLY7BDoIwEET/Zc8IFVqwnLnCRT2bst0IEVpiSwwS/t1CPM7Lzs5bYXRPKMHNiBABWk1Qsgi08grKFQx9yPnqn3Z6fw/hvvN+cmWSGOtiQ56UoxjtmCzaYWftcLJm6A0lZyEZvwiRFVzkk/LYPVKWMibSPG57EyYP+KIlPG3qWwB28r01Kqysh8a1/+5O8d+qmceQtgjqSoQOaSa5VKrgHJFIKNnmO8rbNNMoC9i27QdwMzK25QAAAA0KMA0KDQo=";
-        byte[] decode = Base64.getDecoder().decode(entity);
-        System.out.println(new String(decode, "UTF-8"));
-        System.out.println(Arrays.toString(decode));
-        String str = new String(decode);
-        System.out.println(str);
-        byte[] splitBytes = "\r\n\r\n".getBytes(StandardCharsets.ISO_8859_1);
-        int index = 0;
-        f:
-        for (int i = 0; i < decode.length; i++) {
-            if (i == decode.length - 4) {
-                break;
-            }
-            int count = 0;
-            while (i < decode.length && count < splitBytes.length) {
-                if (decode[i] != splitBytes[count]) {
-                    break;
-                }
-                i++;
-                count++;
-                if (count == 4) {
-                    index = i;
-                    break f;
-                }
-            }
-        }
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        int newLen = decode.length - 5;
-        while (((decode[newLen] != 13 && decode[newLen + 1] != 10) || (decode[index] != 10 && decode[index - 1] != 13)) && newLen > index) {
-            if (decode[newLen] != 13 && decode[newLen + 1] != 10) {
-                newLen--;
-            }
-            if (decode[index] != 10 && decode[index - 1] != 13) {
-                index++;
-            }
-        }
-        for (int i = index + 1; i < newLen; i++) {
-            out.write(decode[i]);
-        }
-        ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
-        GZIPInputStream gunzip = new GZIPInputStream(in);
-        ByteArrayOutputStream fout = new ByteArrayOutputStream();
-        byte[] buffer = new byte[256];
-        int n;
-        while ((n = gunzip.read(buffer)) >= 0) {
-            fout.write(buffer, 0, n);
-        }
-        System.out.println(fout.toString());
-        in.close();
-        gunzip.close();
-        out.close();
-        fout.close();
-        //System.out.println(Arrays.toString(split));
-    }
-
-    @Test
-    public void test3145() throws Exception {
-        byte[] bytes = "dwe".getBytes(StandardCharsets.ISO_8859_1);
-        String s = Arrays.toString(bytes);
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        out.write(bytes, 0, bytes.length);
-        System.out.println(Arrays.toString(out.toByteArray()));
-    }
-
-    @Test
-    public void test315() throws Exception {
-        File f = new File("C:\\Users\\10174\\Desktop\\json\\新建文本文档.txt");
-        String s = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
-        System.out.println(Arrays.toString(s.split("\r\n\r\n")));
-    }
 }

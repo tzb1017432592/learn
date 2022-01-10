@@ -21,7 +21,7 @@ public class ArrayStack<T> implements AbstractStack<T> {
 
     @Override
     public void push(T t) {
-        if (size()==stack.length){
+        if (size()>=stack.length){
             expandCapacity();
         }
         stack[top]=t;
