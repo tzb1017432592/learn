@@ -79,4 +79,8 @@ public class Trie {
     public int getSize() {
         return size;
     }
+
+    public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis());
+    }
 }

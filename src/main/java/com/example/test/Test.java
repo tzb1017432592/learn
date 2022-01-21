@@ -2,7 +2,9 @@ package com.example.test;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.PropertyNamingStrategy;
 import com.alibaba.fastjson.parser.Feature;
+import com.alibaba.fastjson.serializer.SerializeConfig;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -206,7 +208,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void test23241(){
+    public void test23241() {
         String json = "{\"state\":{\"$ref\":\"u5g205-1640860446\"},\"force\":true}";
         JSONObject jsonObject = JSONObject.parseObject(json, Feature.DisableSpecialKeyDetect);
         System.out.println(jsonObject.toString());
@@ -787,7 +789,6 @@ public class Test {
     }
 
 
-
     @org.junit.Test
     public void test425() throws Exception {
         //String fileUrl = "https://upos-sz-mirrorkodo.bilivideo.com/upgcxcode/61/88/456828861/456828861-1-208.mp4?e=ig8euxZM2rNcNbNBhWdVhwdlhbU1hwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1639037422&gen=playurlv2&os=kodobv&oi=1950233169&trid=b84b5204960647ff9ffbd90a8278e643T&platform=html5&upsig=9f4c479f02822af2787a5cb4c2fa5e3f&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=0&bvc=vod&nettype=0&bw=251976&orderid=0,1&logo=80000000";
@@ -825,4 +826,27 @@ public class Test {
             System.err.println("错误：" + e);
         }
     }
+
+    @org.junit.Test
+    public void test325() throws IOException {
+        String json = FileUtils.readFileToString(new File("C:\\Users\\10174\\Desktop\\新建文件夹 (3)\\data\\ads_fai_lkzs.json"), StandardCharsets.UTF_8);
+        JSONObject jsonObject = JSONObject.parseObject(json);
+        JSONObject nodeJsonObject = (JSONObject) jsonObject.get("hits");
+        JSONArray jsonArray = (JSONArray) nodeJsonObject.get("hits");
+        int i = 0;
+        List<HostelVo> list = new ArrayList<>();
+        for (Object o : jsonArray) {
+            if (i == 3) break;
+            JSONObject node = (JSONObject) o;
+            JSONObject jsonObject1 = (JSONObject) node.get("_source");
+            HostelVo carVo = JSONObject.parseObject(jsonObject1.toJSONString(), HostelVo.class);
+            list.add(carVo);
+            i++;
+        }
+        SerializeConfig config = new SerializeConfig();
+        config.propertyNamingStrategy = PropertyNamingStrategy.SnakeCase;
+        System.out.println(JSONObject.toJSONString(ResponseTemplate.success(list), config));
+
+    }
+
 }
